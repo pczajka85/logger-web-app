@@ -1,0 +1,5 @@
+.stack-trace-text{
+	display: inline-block;
+    overflow: auto;
+    width: 800px;
+}

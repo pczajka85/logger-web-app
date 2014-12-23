@@ -6,6 +6,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
+<h:head>
+<h:outputStylesheet name="css/style.css"></h:outputStylesheet>
+</h:head>
 <h:body>
 	<h:form>
 		<h:messages />
@@ -29,15 +32,13 @@
 		<h:commandButton value="Search" action="#{logs.searchAction}" />
 	</h:form>
 
-	<p rendered="#{logs.logFiles.size()==0}">found nothing</p>
-
 	<ui:repeat var="logFile" value="#{logs.logFiles}" rendered="#{logs.logFiles.size() gt 0}">
 		<h3>#{logFile.fileName}</h3>
 		<p>found #{logFile.smallContent.size()}</p>
 		<h:dataTable value="#{logFile.smallContent }" var="sc" border="1">
 			<h:column>
 				<f:facet name="header">Stack Trace</f:facet>
-				<h:outputText value="#{sc}" escape="false"></h:outputText>
+				<h:outputText value="#{sc}" escape="false" styleClass="stack-trace-text"></h:outputText>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Actions</f:facet>
