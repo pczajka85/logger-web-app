@@ -2,4 +2,25 @@
 	display: inline-block;
     overflow: auto;
     width: 800px;
+    font-size: 12px;
+}
+.logs-table{
+	display: none;
+}
+.pure-table td{
+	border-bottom: 1px solid #CCCCCC;
+}
+.upper-downer-butttons{
+	position:relative;
+    height:100px;
+    width:100px;
+}
+.top, .bottom{
+	position: absolute;
+}
+.top{
+	top: 0;
+}
+.bottom{
+	bottom: 0;
 }

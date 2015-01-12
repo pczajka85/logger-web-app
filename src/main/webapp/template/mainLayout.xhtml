@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<h:outputScript name="js/jquery-2.1.3.min.js"></h:outputScript>
+	<h:outputScript name="js/Main.js"></h:outputScript>
+	<h:outputStylesheet name="css/pure-min.css"></h:outputStylesheet>
+	<h:outputStylesheet name="css/style.css"></h:outputStylesheet>
+	<title>Logger Web App</title>
+</h:head>
+<h:body>
+	<ui:insert name="header">
+		<div class="pure-menu pure-menu-open pure-menu-horizontal">
+		<a class="pure-menu-heading" href="">LoggerWebApp</a>
+			<ul>
+				<li><h:link value="Wyszukiwarka" outcome="index" /></li>
+				<li><h:form><h:commandLink action="#{applicationBean.refreshAction}" value="Konfiguracja" /></h:form></li>
+				<li><h:outputText value="Witaj #{loginBean.username}" rendered="#{loginBean.loggedIn}" /></li>
+			</ul>
+		</div>
+	</ui:insert>
+	<ui:insert name="content">
+	    Add your content here or delete to use the default
+	</ui:insert>
+	<ui:insert name="footer">
+		<div class="footer"></div>
+	</ui:insert>
+</h:body>
+</html>

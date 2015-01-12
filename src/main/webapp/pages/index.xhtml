@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition template="/template/mainLayout.xhtml">
+		<ui:define name="content">
+			<h2>Wyszukiwarka</h2>
+			<h:form styleClass="pure-form">
+				<h:messages />
+				<table>
+					<tr>
+						<td>Nazwa serwera</td>
+						<td>
+							<h:selectOneMenu value="#{logs.applicationId}">
+								<f:selectItems value="#{logs.applicationsValue}" />
+							</h:selectOneMenu>
+						</td>
+					</tr>
+					<tr>
+						<td>Szukana fraza</td>
+						<td><h:inputText value="#{logs.searchingPhrase}"
+								label="Szukana fraza" required="true"></h:inputText></td>
+					</tr>
+					<tr>
+						<td>Data (dd-MM-yyyy)</td>
+						<td><h:inputText value="#{logs.date}" label="Data" required="true">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</h:inputText></td>
+					</tr>
+				</table>
+				<h:commandButton value="Search" action="#{logs.searchAction}" />
+			</h:form>
+
+			<p>#{logs.message}</p>
+
+			<h:dataTable binding="#{table}" var="logFile" value="#{logs.logFiles}" rendered="#{logs.logFiles.size() gt 0}">
+				<h:column>
+				<h3>#{logFile.fileName}</h3>
+				<p>
+					found #{logFile.smallContent.size()}
+					<h:commandButton value="Show" styleClass="show-table"
+						onclick="showTable('tableNo-#{table.rowIndex}')" />
+				</p>
+				<h:dataTable value="#{logFile.smallContent }" var="sc" border="1"
+					styleClass="logs-table tableNo-#{table.rowIndex} pure-table">
+					<h:column>
+						<f:facet name="header">Stack Trace</f:facet>
+						<h:outputText value="#{sc.content}" id="upper-content" escape="false"
+							styleClass="stack-trace-text"></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Actions</f:facet>
+						<div class="upper-downer-butttons">
+						<h:commandButton value="More up" styleClass="top">
+							<f:ajax execute="@form" listener="#{logs.showMoreAboveAction(sc)}" render="upper-content" />
+						</h:commandButton>
+						<h:commandButton value="More down" styleClass="bottom">
+							<f:ajax execute="@form" listener="#{logs.showMoreBelowAction(sc)}" render="upper-content" />
+						</h:commandButton>
+						</div>
+					</h:column>
+				</h:dataTable>
+				</h:column>
+			</h:dataTable>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

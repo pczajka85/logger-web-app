@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition template="/template/mainLayout.xhtml">
+		<ui:define name="content">
+			<h2>Konfiguracja aplikacji</h2>
+			<h:messages />
+			<h:form>
+				<h:dataTable value="#{applicationBean.applications}" var="app"
+					styleClass="pure-table">
+					<h:column>
+						<f:facet name="header">Nazwa aplikacji</f:facet>
+						<h:outputText value="#{app.name}" rendered="#{not app.editable}"></h:outputText>
+						<h:inputText value="#{app.name}" rendered="#{app.editable}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Host</f:facet>
+						<h:outputText value="#{app.host}" rendered="#{not app.editable}"></h:outputText>
+						<h:inputText value="#{app.host}" rendered="#{app.editable}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Nazwa uzytkownika</f:facet>
+						<h:outputText value="#{app.username}"
+							rendered="#{not app.editable}"></h:outputText>
+						<h:inputText value="#{app.username}" rendered="#{app.editable}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Haslo</f:facet>
+						<h:outputText value="#{app.password}"
+							rendered="#{not app.editable}"></h:outputText>
+						<h:inputText value="#{app.password}" rendered="#{app.editable}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Sciezki Logow</f:facet>
+						<h:dataTable value="#{app.logDirs.toArray()}" var="ld">
+							<h:column>
+								<h:outputText value="#{ld.path}" />
+							</h:column>
+						</h:dataTable>
+						<h:commandLink value="Edit" action="#{logDirBean.startAction(app)}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Nazwy Logow</f:facet>
+						<h:dataTable value="#{app.logfileExpressions.toArray()}" var="lfe">
+							<h:column>
+								<h:outputText value="#{lfe.fileExpression}" />
+							</h:column>
+						</h:dataTable>
+						<h:commandLink value="Edit" action="#{logFileExpressionBean.startAction(app)}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Action</f:facet>
+						<h:commandButton value="Edit"
+							action="#{applicationBean.setEditableAction(app)}" />
+						<h:commandButton value="Delete" styleClass="are-you-sure" action="#{applicationBean.deleteAction(app)}" />
+						<h:commandButton value="Start" action="#{applicationBean.startAction(app)}" rendered="#{not app.started}" />
+						<h:commandButton value="Stop" action="#{applicationBean.stopAction(app)}" rendered="#{app.started}" />
+					</h:column>
+				</h:dataTable>
+				<h:commandButton value="Save" action="#{applicationBean.editAction}" />
+			</h:form>
+			<h:form styleClass="pure-form">
+				<table class="pure-table">
+					<tr>
+						<td>nazwa aplikacji</td>
+						<td><h:inputText value="#{applicationBean.name}"
+								required="true" /></td>
+					</tr>
+					<tr>
+						<td>host</td>
+						<td><h:inputText value="#{applicationBean.host}"
+								required="true" /></td>
+					</tr>
+					<tr>
+						<td>nazwa uzytkownika</td>
+						<td><h:inputText value="#{applicationBean.username}"
+								required="true" /></td>
+					</tr>
+					<tr>
+						<td>haslo</td>
+						<td><h:inputText value="#{applicationBean.password}"
+								required="true" /></td>
+					</tr>
+				</table>
+				<h:commandButton value="Save" action="#{applicationBean.addAction}" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition template="/template/mainLayout.xhtml">
+		<ui:define name="content">
+			<h2>Konfiguracja logow dla #{logDirBean.application.name}</h2>
+			<p>
+				<h:messages />
+			</p>
+			<h:form styleClass="pure-form">
+				<h:dataTable styleClass="pure-table" value="#{logDirBean.logDirs}"
+					var="ld">
+					<h:column>
+						<f:facet name="header">Dir Path</f:facet>
+						<h:inputText value="#{ld.path}" rendered="#{ld.editable}" />
+						<h:outputText value="#{ld.path}" rendered="#{not ld.editable}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Action</f:facet>
+						<h:commandButton value="Edit"
+							action="#{logDirBean.setEditableAction(ld)}" />
+						<h:commandButton value="Delete" styleClass="are-you-sure" action="#{logDirBean.deleteAction(ld)}" />
+					</h:column>
+				</h:dataTable>
+				<h:commandButton value="Save" action="#{logDirBean.editAction}" />
+			</h:form>
+
+			<h:form styleClass="pure-form">
+				<table>
+					<tr>
+						<td>dir path</td>
+						<td><h:inputText value="#{logDirBean.dirPath}"
+								required="true" /></td>
+					</tr>
+				</table>
+				<h:commandButton value="Add" action="#{logDirBean.addAction}" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
