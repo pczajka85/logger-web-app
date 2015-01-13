@@ -22,11 +22,11 @@ public class ApplicationDao {
 		session.close();
 	}
 
+	@SuppressWarnings("unchecked")
 	public static List<Application> getAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		List<Application> apps = session
 				.createQuery("SELECT a FROM Application a").list();
-//		List<Application> apps = session.createCriteria(Application.class).list();
 		session.close();
 
 		return apps;
