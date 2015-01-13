@@ -12,6 +12,7 @@ import pl.cyfrowypolsat.util.HibernateUtil;
 
 public class DeveloperDao {
 
+	@SuppressWarnings("unchecked")
 	public static List<Developer> getAllDevelopers(){
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		List<Developer> developers = session.createCriteria(Developer.class).list();
