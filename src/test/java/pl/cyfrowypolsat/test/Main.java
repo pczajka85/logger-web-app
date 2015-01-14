@@ -1,8 +1,5 @@
 package pl.cyfrowypolsat.test;
 
-import java.security.NoSuchAlgorithmException;
-import java.util.Calendar;
-
 import org.hibernate.Session;
 
 import pl.cyfrowypolsat.dao.DeveloperDao;

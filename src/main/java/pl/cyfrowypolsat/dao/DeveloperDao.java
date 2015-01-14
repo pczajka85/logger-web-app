@@ -45,9 +45,8 @@ public class DeveloperDao {
 	                result = "0" + result;
 	            }
 			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} //or "SHA-1"
+			}
             
         }
         return result;

@@ -29,9 +29,9 @@ public class LoginBean implements Serializable {
 		return "login.xhtml";
 	}
 	
-	//TODO implement it
 	public String logoutAction(){
-		return null;
+		this.loggedIn = false;
+		return "/login.xhtml";
 	}
 	
 	public String getUsername() {

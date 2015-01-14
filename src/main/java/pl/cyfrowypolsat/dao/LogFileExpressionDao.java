@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Session;
 
 import pl.cyfrowypolsat.entity.Application;
-import pl.cyfrowypolsat.entity.LogDir;
 import pl.cyfrowypolsat.entity.LogfileExpression;
 import pl.cyfrowypolsat.util.HibernateUtil;
 

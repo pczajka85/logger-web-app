@@ -18,9 +18,10 @@
 		<div class="pure-menu pure-menu-open pure-menu-horizontal">
 		<a class="pure-menu-heading" href="">LoggerWebApp</a>
 			<ul>
-				<li><h:link value="Wyszukiwarka" outcome="index" /></li>
-				<li><h:form><h:commandLink action="#{applicationBean.refreshAction}" value="Konfiguracja" /></h:form></li>
+				<li><h:link value="Wyszukiwarka" outcome="index" rendered="#{loginBean.loggedIn}" /></li>
+				<li><h:form><h:commandLink action="#{applicationBean.refreshAction}" value="Konfiguracja" rendered="#{loginBean.loggedIn}" /></h:form></li>
 				<li><h:outputText value="Witaj #{loginBean.username}" rendered="#{loginBean.loggedIn}" /></li>
+				<li><h:form><h:commandLink value="Wyloguj" action="#{loginBean.logoutAction}" rendered="#{loginBean.loggedIn}" /></h:form></li>
 			</ul>
 		</div>
 	</ui:insert>
