@@ -46,6 +46,7 @@ public class SearchPhrase implements Runnable {
 			BufferedReader in = new BufferedReader(fr);
 			LogFile logFile = new LogFile();
 			logFile.setPath(file.getAbsolutePath());
+			logFile.setFileName(file.getName());
 			StringBuffer sb = new StringBuffer();
 			boolean getMoreStackTrace = false;
 			int stackTraceLineNo = 0;
@@ -53,7 +54,6 @@ public class SearchPhrase implements Runnable {
 			int i = 1; // line numbers
 			while ((s = in.readLine()) != null) {
 				if (s.contains(searchingPhrase)) {
-					logFile.setFileName(file.getName());
 					getMoreStackTrace = true;
 				}
 				if (getMoreStackTrace == true && stackTraceLineNo < 6) {

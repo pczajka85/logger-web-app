@@ -2,6 +2,7 @@ package pl.cyfrowypolsat.listener;
 
 import java.util.Calendar;
 import java.util.Timer;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -17,10 +18,9 @@ import pl.cyfrowypolsat.util.HibernateUtil;
 @WebListener
 public class ContextListener implements ServletContextListener {
 
-    /**
-     * Default constructor. 
-     */
-    public ContextListener() {
+    private static final Logger logger = Logger.getLogger("ContextListener");
+	
+	public ContextListener() {
     }
 
 	/**
@@ -35,11 +35,11 @@ public class ContextListener implements ServletContextListener {
         Timer timer = new Timer();
 		Calendar date = Calendar.getInstance();
 		date.set(Calendar.DAY_OF_MONTH, date.get(Calendar.DAY_OF_MONTH)+1);
-		date.set(Calendar.HOUR, 0);
+		date.set(Calendar.HOUR_OF_DAY, 0);
 		date.set(Calendar.MINUTE, 1);
 		date.set(Calendar.SECOND, 0);
 		date.set(Calendar.MILLISECOND, 0);
-		System.out.println("I will start at "+date.getTime());
+		logger.info("I will start download files from "+date.getTime());
 		timer.schedule(new FileDownloader(), date.getTime(), 1000*60*60*24);
     }
 
