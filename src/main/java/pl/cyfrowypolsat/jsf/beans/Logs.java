@@ -60,8 +60,10 @@ public class Logs implements Serializable {
 		List<File> folders = new ArrayList<File>();
 		for(LogDir ld : app.getLogDirs()){
 			File folder = new File(dir+app.getName()+'/'+ld.getPath()+'/'+sdf.format(date));
-			this.filesNo += folder.listFiles().length;
-			folders.add(folder);
+			if(folder.exists()){
+				this.filesNo += folder.listFiles().length;
+				folders.add(folder);
+			}
 		}
 		logger.info("FILES NO = " + this.filesNo);
 		for(File folder : folders){
