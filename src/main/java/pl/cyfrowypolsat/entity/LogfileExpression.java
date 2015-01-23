@@ -45,4 +45,8 @@ public class LogfileExpression implements Serializable{
 	public void setEditable(boolean editable) {
 		this.editable = editable;
 	}
+	
+	public long getId() {
+		return id;
+	}
 }
