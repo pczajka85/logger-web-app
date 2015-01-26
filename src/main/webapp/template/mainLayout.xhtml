@@ -20,6 +20,7 @@
 			<ul>
 				<li><h:link value="Wyszukiwarka" outcome="index" rendered="#{loginBean.loggedIn}" /></li>
 				<li><h:form><h:commandLink action="#{applicationBean.refreshAction}" value="Konfiguracja" rendered="#{loginBean.loggedIn}" /></h:form></li>
+				<li><h:form><h:commandLink action="#{errorCounterBean.refreshAction}" value="Licznik błędów" rendered="#{loginBean.loggedIn}" /></h:form></li>
 				<li><h:outputText value="Witaj #{loginBean.username}" rendered="#{loginBean.loggedIn}" /></li>
 				<li><h:form><h:commandLink value="Wyloguj" action="#{loginBean.logoutAction}" rendered="#{loginBean.loggedIn}" /></h:form></li>
 			</ul>

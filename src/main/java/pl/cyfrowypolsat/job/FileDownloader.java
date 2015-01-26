@@ -90,4 +90,8 @@ public class FileDownloader extends TimerTask {
 			}
 		}
 	}
+	
+	//TODO implement it
+	private void addErrors() {
+	}
 }

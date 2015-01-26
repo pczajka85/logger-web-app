@@ -28,6 +28,7 @@ public class LogfileExpression implements Serializable{
 	
 	public void setApplication(Application application) {
 		this.application = application;
+		application.addLogFileExpression(this);
 	}
 	
 	public String getFileExpression() {

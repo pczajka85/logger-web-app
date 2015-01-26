@@ -35,9 +35,9 @@
 
 					<h:column>
 						<f:facet name="header">Haslo</f:facet>
-						<h:outputText value="#{app.password}"
+						<h:outputText value="***"
 							rendered="#{not app.editable}"></h:outputText>
-						<h:inputText value="#{app.password}" rendered="#{app.editable}" />
+						<h:inputText  value="#{app.password}"  rendered="#{app.editable}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">Sciezki Logow</f:facet>
@@ -87,7 +87,7 @@
 					</tr>
 					<tr>
 						<td>haslo</td>
-						<td><h:inputText value="#{applicationBean.password}"
+						<td><h:inputSecret value="#{applicationBean.password}"
 								required="true" /></td>
 					</tr>
 				</table>

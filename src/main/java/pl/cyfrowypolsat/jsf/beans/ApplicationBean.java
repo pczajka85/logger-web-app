@@ -52,7 +52,12 @@ public class ApplicationBean implements Serializable {
 	}
 	
 	public String deleteAction(Application app){
-		ApplicationDao.delete(app);
+		try{
+			ApplicationDao.delete(app);
+		}catch(Exception e){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Nastąpił problem z usunięciem aplikacji."));
+			e.printStackTrace();
+		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Aplikacja usunieta pomyslnie."));
 		this.applications = ApplicationDao.getAll();
 		return null;

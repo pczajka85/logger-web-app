@@ -1,6 +1,7 @@
 package pl.cyfrowypolsat.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,6 +39,7 @@ public class LogDir implements Serializable {
 
 	public void setApplication(Application application) {
 		this.application = application;
+		application.addLogDir(this);
 	}
 	
 	public boolean isEditable() {

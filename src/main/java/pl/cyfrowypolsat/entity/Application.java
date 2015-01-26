@@ -1,6 +1,7 @@
 package pl.cyfrowypolsat.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -33,11 +34,15 @@ public class Application implements Serializable{
 
 	@OneToMany(mappedBy="application", fetch=FetchType.EAGER)
 	@Cascade(CascadeType.DELETE)
-	private Set<LogDir> logDirs;
+	private Set<LogDir> logDirs = new HashSet<LogDir>();
 	
 	@OneToMany(mappedBy="application", fetch=FetchType.EAGER)
 	@Cascade(CascadeType.DELETE)
-	private Set<LogfileExpression> logfileExpressions;
+	private Set<LogfileExpression> logfileExpressions = new HashSet<LogfileExpression>();
+	
+	@OneToMany(mappedBy="application")
+	@Cascade(CascadeType.DELETE)
+	private Set<ErrorCount> errorCounts = new HashSet<ErrorCount>();
 	
 	@Transient
 	private boolean editable;
@@ -92,6 +97,10 @@ public class Application implements Serializable{
 	public void setLogDirs(Set<LogDir> logDirs) {
 		this.logDirs = logDirs;
 	}
+	
+	public void addLogDir(LogDir ld){
+		logDirs.add(ld);
+	}
 
 	public Set<LogfileExpression> getLogfileExpressions() {
 		return logfileExpressions;
@@ -101,12 +110,28 @@ public class Application implements Serializable{
 		this.logfileExpressions = logfileExpressions;
 	}
 	
+	public void addLogFileExpression(LogfileExpression lfe){
+		this.logfileExpressions.add(lfe);
+	}
+	
 	public boolean isStarted() {
 		return started;
 	}
 	
 	public void setStarted(boolean started) {
 		this.started = started;
+	}
+	
+	public Set<ErrorCount> getErrorCounts() {
+		return errorCounts;
+	}
+	
+	public void setErrorCounts(Set<ErrorCount> errorCounts) {
+		this.errorCounts = errorCounts;
+	}
+	
+	public void addErrorCount(ErrorCount eCount){
+		this.errorCounts.add(eCount);
 	}
 
 }

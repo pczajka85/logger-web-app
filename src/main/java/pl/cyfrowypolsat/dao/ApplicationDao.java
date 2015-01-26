@@ -1,10 +1,13 @@
 package pl.cyfrowypolsat.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.exception.ConstraintViolationException;
 
 import pl.cyfrowypolsat.entity.Application;
+import pl.cyfrowypolsat.entity.ErrorCount;
 import pl.cyfrowypolsat.util.HibernateUtil;
 
 public class ApplicationDao {
@@ -32,15 +35,16 @@ public class ApplicationDao {
 		return apps;
 	}
 
-	public static void delete(Application app) {
+	public static void delete(Application app) throws ConstraintViolationException {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		try {
 			session.delete(app);
 			session.getTransaction().commit();
-		} catch (Exception e) {
+		} catch (ConstraintViolationException e) {
 			session.getTransaction().rollback();
-			e.printStackTrace();
+			throw e;
+//			e.printStackTrace();
 		}
 
 		session.close();
@@ -65,5 +69,14 @@ public class ApplicationDao {
 		Application app = (Application) session.get(Application.class, id);
 		session.close();
 		return app;
+	}
+	
+	public static List<Application> getByErrorCounterDate(Date date){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		List<Application> apps = session.createQuery(
+				"FROM Application a JOIN a.errorCounts ec WHERE ec.date = :date")
+		.setParameter("date", date).list();
+		session.close();
+		return apps;
 	}
 }

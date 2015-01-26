@@ -12,6 +12,7 @@ import pl.cyfrowypolsat.dao.DeveloperDao;
 import pl.cyfrowypolsat.dao.LogDirDao;
 import pl.cyfrowypolsat.dao.LogFileExpressionDao;
 import pl.cyfrowypolsat.entity.Application;
+import pl.cyfrowypolsat.entity.Developer;
 import pl.cyfrowypolsat.entity.LogDir;
 import pl.cyfrowypolsat.entity.LogfileExpression;
 
@@ -21,6 +22,10 @@ public class JUnitTest extends Assert {
 	public void loginWithMd5() {
 		String pass = "xxx";		
 		assertEquals(DeveloperDao.md5(pass), "f561aaf6ef0bf14d4208bb46a4ccb3ad");
+		
+		for(Developer d : DeveloperDao.getAllDevelopers()){
+			assertEquals(d.getPassword().length(), 32);
+		}
 	}
 	
 	@Test
@@ -58,7 +63,12 @@ public class JUnitTest extends Assert {
 		app.setEditable(false);
 		ApplicationDao.save(app);
 		//delete
-		ApplicationDao.delete(app);
+		try{
+			ApplicationDao.delete(app);
+		}catch(Exception e){
+			assertTrue(false);
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
@@ -78,10 +88,16 @@ public class JUnitTest extends Assert {
 		//update
 		lfe3.setEditable(false);
 		LogFileExpressionDao.save(lfe3);
-		//delete
-		LogFileExpressionDao.delete(lfe3);
 		
-		ApplicationDao.delete(app);
+		//delete
+//		LogFileExpressionDao.delete(lfe3);
+		
+		try{
+			ApplicationDao.delete(app);
+		}catch(ConstraintViolationException e){
+			assertTrue(false);
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
@@ -102,16 +118,22 @@ public class JUnitTest extends Assert {
 		LogDir ldDao = LogDirDao.getByApplication(app).get(0);
 		assertEquals(ld.getId(), ldDao.getId());
 		
-//		LogDirDao.delete(ld);
-		//TODO this doesnt work
 		try{
 			ApplicationDao.delete(app);
 		}catch(ConstraintViolationException e){
-			assertTrue(false);
 			e.printStackTrace();
+			assertTrue(false);
 		}
 	}
 	
+	//TODO implement it
+	public void errorCountCrud() {
+	}
+	
+	//TODO implement it
+	public void developerCrud() {
+	}
+		
 	private Application getTestApp() {
 		Application app = new Application();
 		app.setEditable(true);
