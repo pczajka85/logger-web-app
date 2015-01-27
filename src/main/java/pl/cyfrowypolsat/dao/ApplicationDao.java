@@ -74,7 +74,7 @@ public class ApplicationDao {
 	public static List<Application> getByErrorCounterDate(Date date){
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		List<Application> apps = session.createQuery(
-				"FROM Application a JOIN a.errorCounts ec WHERE ec.date = :date")
+				"SELECT DISTINCT a FROM Application a JOIN FETCH a.errorCounts ec WHERE ec.date = :date")
 		.setParameter("date", date).list();
 		session.close();
 		return apps;

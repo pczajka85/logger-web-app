@@ -29,15 +29,15 @@
 				styleClass="pure-table">
 				<h:column>
 					<h:outputText value="#{app.name}" />
-					<h:dataTable>
-						<h:dataTable value="#{app.errorCounts}" var="errorCount">
-							<h:column>
-								<h:outputText value="#{errorCount.errorType}" />
-							</h:column>
-							<h:column>
-								<h:outputText value="#{errorCount.count}" />
-							</h:column>
-						</h:dataTable>
+				</h:column>
+				<h:column>
+					<h:dataTable value="#{app.errorCounts.toArray()}" var="errorCount">
+						<h:column>
+							<h:outputText value="#{errorCount.errorType}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{errorCount.count}" />
+						</h:column>
 					</h:dataTable>
 				</h:column>
 			</h:dataTable>
