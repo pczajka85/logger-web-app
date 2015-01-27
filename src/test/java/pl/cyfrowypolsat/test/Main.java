@@ -1,5 +1,9 @@
 package pl.cyfrowypolsat.test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.hibernate.Session;
 
 import pl.cyfrowypolsat.dao.DeveloperDao;
@@ -10,18 +14,15 @@ import pl.cyfrowypolsat.util.HibernateUtil;
 public class Main {
 
 	public static void main(String[] args) {
-//		System.out.println(DeveloperDao.md5("xxx"));
-		HibernateUtil.createSessionFactory();
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Developer d = (Developer) session.createQuery("FROM Developer d").uniqueResult();
-		String s1 = d.getPassword();
-		String s2;
-		s2 = DeveloperDao.md5("xxsx");
-		System.out.println(s1);
-		System.out.println(s2);			
-		System.out.println("ARE EQUALS = " + s1.equals(s2));
-		
-		HibernateUtil.getSessionFactory().close();
+		String date = "24.01.2015"; 
+		Date thisDate;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+		try {
+			thisDate = sdf.parse(date);
+			System.out.println(thisDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void fileDownload(){
