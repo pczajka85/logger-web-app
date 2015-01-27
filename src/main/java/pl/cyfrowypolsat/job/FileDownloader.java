@@ -6,7 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.TimerTask;
 import java.util.logging.Logger;
 
@@ -49,6 +51,7 @@ public class FileDownloader extends TimerTask {
 				yesterday.set(Calendar.DAY_OF_MONTH, Calendar.getInstance().get(Calendar.DAY_OF_MONTH)-1);
 				
 				String yesterdayDateFormat = sdf.format(yesterday.getTime());
+				List<File> addedFiles = new ArrayList<File>();
 				for (LogDir remoteDir : app.getLogDirs()) {
 					File dir = new File(
 							MAIN_LOG_DIR + app.getName() + '/' + remoteDir.getPath()
@@ -66,6 +69,7 @@ public class FileDownloader extends TimerTask {
 											remoteDir.getPath() + "/" + f.getName(), os);
 									if (download) {
 										log.info(f.getName() + " DOWNLOADED");
+										addedFiles.add(df);
 									}else{
 										log.severe("Downloading " + f.getName() + " Error");
 									}
@@ -76,6 +80,7 @@ public class FileDownloader extends TimerTask {
 					}
 				}
 				ftpClient.logout();
+				this.countAndSaveErrors(addedFiles);
 			}else{
 				log.severe("Login or password are incorrect for " + app.getName());
 			}
@@ -92,6 +97,9 @@ public class FileDownloader extends TimerTask {
 	}
 	
 	//TODO implement it
-	private void addErrors() {
+	private void countAndSaveErrors(List<File> files) {
+		for(File f : files){
+			log.info("ADDED FILE="+f.getAbsolutePath());
+		}
 	}
 }

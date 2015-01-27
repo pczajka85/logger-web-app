@@ -20,20 +20,10 @@ import pl.cyfrowypolsat.util.HibernateUtil;
 public class Main {
 
 	public static void main(String[] args) {
-		Calendar dateStart = Calendar.getInstance();
-		List<String> dateRange = new LinkedList<String>();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-		dateStart.set(2015, 0, 1);
-		
-//		System.out.println(dateStart.getTime());
-//		System.out.println(new Date());
-		
-		while(dateStart.getTime().before(new Date())){
-			dateRange.add(sdf.format(dateStart.getTime()));
-			dateStart.add(Calendar.DATE, 1);
-		}
-		
-		System.out.println(dateRange.size());
+		String x1 = "1212icok2.8989";
+		System.out.println(x1.matches("*icok.*"));
+//		Main m = new Main();
+//		m.fileDownload();
 	}
 	
 	private void fileDownload(){

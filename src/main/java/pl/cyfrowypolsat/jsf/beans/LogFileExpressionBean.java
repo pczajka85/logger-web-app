@@ -49,6 +49,7 @@ public class LogFileExpressionBean implements Serializable {
 		for(LogfileExpression lfe : logFileExpressions){
 			if(lfe.isEditable()){
 				lfe.setEditable(false);
+				//TODO implement PatternSyntaxException validator
 				LogFileExpressionDao.save(lfe);
 			}
 		}
