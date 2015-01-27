@@ -16,17 +16,20 @@
 				</h:outputText>
 			</h2>
 			<h:form>
-				<ul>
+				<ul class="days-list">
+				<ui:repeat var="date" value="#{errorCounterBean.dateRange}">
 					<li><h:commandLink
-							action="#{errorCounterBean.setDateAction('25.01.2015')}"
-							value="25.01.2015" /></li>
-					<li><h:commandLink
-							action="#{errorCounterBean.setDateAction('26.01.2015')}"
-							value="26.01.2015" /></li>
+							action="#{errorCounterBean.setDateAction(date)}"
+							value="#{date}" /></li>
+				</ui:repeat>
 				</ul>
 			</h:form>
+			<ui:fragment rendered="#{errorCounterBean.applications.size() == 0}">
+				<p>Nic nie znaleziono</p>
+			</ui:fragment>
+			
 			<h:dataTable value="#{errorCounterBean.applications}" var="app"
-				styleClass="pure-table">
+				styleClass="pure-table" rendered="#{errorCounterBean.applications.size() > 0}">
 				<h:column>
 					<h:outputText value="#{app.name}" />
 				</h:column>

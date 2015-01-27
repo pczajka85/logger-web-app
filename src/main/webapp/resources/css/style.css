@@ -24,3 +24,14 @@
 .bottom{
 	bottom: 0;
 }
+ul.days-list li{
+	display: inline;
+}
+ul.days-list li a{
+	font-size: 10px;
+	text-decoration: none;
+	color: #CCCCCC;
+}
+ul.days-list li a:HOVER {
+	color: #000000;
+}

@@ -2,7 +2,9 @@ package pl.cyfrowypolsat.test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -18,24 +20,20 @@ import pl.cyfrowypolsat.util.HibernateUtil;
 public class Main {
 
 	public static void main(String[] args) {
-		HibernateUtil.createSessionFactory();
-		
+		Calendar dateStart = Calendar.getInstance();
+		List<String> dateRange = new LinkedList<String>();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+		dateStart.set(2015, 0, 1);
 		
-		try {
-			List<Application> apps = ApplicationDao.getByErrorCounterDate(sdf.parse("25.01.2015"));
-			for(Application app: apps){
-//				System.out.println(app.getErrorCounts().size());
-				for(ErrorCount ec : app.getErrorCounts()){
-					System.out.println(ec.getErrorType()+" : "+ec.getCount()+" : " + ec.getDate());
-				}
-			}
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+//		System.out.println(dateStart.getTime());
+//		System.out.println(new Date());
+		
+		while(dateStart.getTime().before(new Date())){
+			dateRange.add(sdf.format(dateStart.getTime()));
+			dateStart.add(Calendar.DATE, 1);
 		}
 		
-		HibernateUtil.getSessionFactory().close();
+		System.out.println(dateRange.size());
 	}
 	
 	private void fileDownload(){
