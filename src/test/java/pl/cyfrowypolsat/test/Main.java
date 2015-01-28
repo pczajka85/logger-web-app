@@ -24,14 +24,6 @@ public class Main {
 	public static void main(String[] args) {
 //		Main m = new Main();
 //		m.fileDownload();
-		
-		try {
-			List<Application> apps = ApplicationDao.getByErrorCounterDate(new SimpleDateFormat("dd.MM.yyyy").parse("27.01.2015"));
-			System.out.println(apps.get(0).getErrorCounts().size());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	private void fileDownload(){

@@ -110,7 +110,6 @@ public class FileDownloader extends TimerTask {
 		}
 	}
 
-	// TODO implement it
 	private void countAndSaveErrors(ErrorCountHelper ech) throws IOException {
 		log.info("APP = " + ech.getApp());
 		log.info("DATE=" + ech.getDate());
@@ -133,7 +132,6 @@ public class FileDownloader extends TimerTask {
 		}
 		if(exceptions.size() > 0){
 			for(Map.Entry<String, Integer> entry : exceptions.entrySet()){
-				log.info(entry.getKey()+" => "+entry.getValue());
 				ErrorCount errorCount = new ErrorCount();
 				errorCount.setApplication(ech.getApp());
 				errorCount.setDate(ech.getDate());

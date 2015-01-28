@@ -1,5 +1,6 @@
 package pl.cyfrowypolsat.test;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,9 +16,16 @@ import pl.cyfrowypolsat.entity.Application;
 import pl.cyfrowypolsat.entity.Developer;
 import pl.cyfrowypolsat.entity.LogDir;
 import pl.cyfrowypolsat.entity.LogfileExpression;
+import pl.cyfrowypolsat.job.FileDownloader;
 
 public class JUnitTest extends Assert {
 
+	@Test
+	public void systemConfiguration(){
+		File dir = new File(FileDownloader.MAIN_LOG_DIR);
+		assertTrue(dir.exists());
+	}
+	
 	@Test
 	public void loginWithMd5() {
 		String pass = "xxx";		
