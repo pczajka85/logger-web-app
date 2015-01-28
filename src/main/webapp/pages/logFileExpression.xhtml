@@ -36,8 +36,11 @@
 				<table>
 					<tr>
 						<td>expression</td>
-						<td><h:inputText value="#{logFileExpressionBean.expression}"
-								required="true" /></td>
+						<td>
+							<h:inputText value="#{logFileExpressionBean.expression}" required="true">
+								<f:validator validatorId="pl.cyfrowypolsat.validators.PatternSyntaxValidator" />
+							</h:inputText>
+						</td>
 					</tr>
 				</table>
 				<h:commandButton value="Add" action="#{logFileExpressionBean.addAction}" />
