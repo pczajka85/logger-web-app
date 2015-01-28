@@ -4,8 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 
@@ -20,10 +22,17 @@ import pl.cyfrowypolsat.util.HibernateUtil;
 public class Main {
 
 	public static void main(String[] args) {
-		String x1 = "1212icok2.8989";
-		System.out.println(x1.matches("*icok.*"));
-//		Main m = new Main();
-//		m.fileDownload();
+//		String exc1 = "INFO: HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException";
+//		String exc2 = "org.postgresql.util.PSQLException: Połączenie odrzucone. Sprawdź, czy prawidłowo ustawiłeś nazwę hosta oraz port i upewnij się, czy postmaster przyjmuje połączenia TCP/IP.";
+//		String exc3 = "2014-12-06 13:49:21,794 WARN  [pl.cyfrowypolsat.homepage.filter.TvProgramRequestsMapperFilter] (ajp-10.217.83.110-8009-42) Parsowanie id eventu, requestURI=/program-tv/ginx-tv/textLayout_2.0.0.232.swz java.lang.NumberFormatException: For input string: ";
+//		
+//		String rule = "^[a-zA-z\\.]+Exception: .*";
+//		
+//		System.out.println(exc1.matches(rule));
+//		System.out.println(exc2.matches(rule));
+//		System.out.println(exc3.matches(rule));
+		Main m = new Main();
+		m.fileDownload();
 	}
 	
 	private void fileDownload(){

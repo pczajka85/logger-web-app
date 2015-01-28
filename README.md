@@ -14,6 +14,6 @@ Konfiguracja:
 
 3. 'Ścieżki logów' - Ustawiamy ścieżki do katalogów logów, np : logs, node1, node2, node3
 
-4. 'Nazwy Logów' - Ustawiamy nazwy logów za pomocą wyrażenia regularnego, np: (.*)catalina(.*), (.*)icok(.*)
+4. 'Nazwy Logów' - Ustawiamy nazwy logów za pomocą wyrażenia regularnego, np: .*catalina.*, .*icok.*
 
 Tak skonfigurowana aplikacja będzie pobierać codziennie minutę po północy pliki logów z dnia poprzedniego.
