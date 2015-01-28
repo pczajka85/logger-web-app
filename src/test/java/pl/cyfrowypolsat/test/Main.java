@@ -22,17 +22,16 @@ import pl.cyfrowypolsat.util.HibernateUtil;
 public class Main {
 
 	public static void main(String[] args) {
-//		String exc1 = "INFO: HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException";
-//		String exc2 = "org.postgresql.util.PSQLException: Połączenie odrzucone. Sprawdź, czy prawidłowo ustawiłeś nazwę hosta oraz port i upewnij się, czy postmaster przyjmuje połączenia TCP/IP.";
-//		String exc3 = "2014-12-06 13:49:21,794 WARN  [pl.cyfrowypolsat.homepage.filter.TvProgramRequestsMapperFilter] (ajp-10.217.83.110-8009-42) Parsowanie id eventu, requestURI=/program-tv/ginx-tv/textLayout_2.0.0.232.swz java.lang.NumberFormatException: For input string: ";
-//		
-//		String rule = "^[a-zA-z\\.]+Exception: .*";
-//		
-//		System.out.println(exc1.matches(rule));
-//		System.out.println(exc2.matches(rule));
-//		System.out.println(exc3.matches(rule));
-		Main m = new Main();
-		m.fileDownload();
+//		Main m = new Main();
+//		m.fileDownload();
+		
+		try {
+			List<Application> apps = ApplicationDao.getByErrorCounterDate(new SimpleDateFormat("dd.MM.yyyy").parse("27.01.2015"));
+			System.out.println(apps.get(0).getErrorCounts().size());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void fileDownload(){

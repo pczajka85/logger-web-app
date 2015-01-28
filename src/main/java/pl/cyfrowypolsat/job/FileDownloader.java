@@ -25,6 +25,7 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
 import pl.cyfrowypolsat.dao.ApplicationDao;
+import pl.cyfrowypolsat.dao.ErrorCounterDao;
 import pl.cyfrowypolsat.entity.Application;
 import pl.cyfrowypolsat.entity.ErrorCount;
 import pl.cyfrowypolsat.entity.LogDir;
@@ -133,11 +134,13 @@ public class FileDownloader extends TimerTask {
 		if(exceptions.size() > 0){
 			for(Map.Entry<String, Integer> entry : exceptions.entrySet()){
 				log.info(entry.getKey()+" => "+entry.getValue());
+				ErrorCount errorCount = new ErrorCount();
+				errorCount.setApplication(ech.getApp());
+				errorCount.setDate(ech.getDate());
+				errorCount.setErrorType(entry.getKey());
+				errorCount.setCount(entry.getValue());
+				ErrorCounterDao.save(errorCount);
 			}
-//			ErrorCount errorCount = new ErrorCount();
-//			errorCount.setApplication(ech.getApp());
-//			errorCount.setDate(ech.getDate());
-			
 		}
 	}
 
