@@ -1,6 +1,7 @@
 package pl.cyfrowypolsat.test;
 
 import java.io.File;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,10 +11,12 @@ import org.junit.Test;
 
 import pl.cyfrowypolsat.dao.ApplicationDao;
 import pl.cyfrowypolsat.dao.DeveloperDao;
+import pl.cyfrowypolsat.dao.ErrorCounterDao;
 import pl.cyfrowypolsat.dao.LogDirDao;
 import pl.cyfrowypolsat.dao.LogFileExpressionDao;
 import pl.cyfrowypolsat.entity.Application;
 import pl.cyfrowypolsat.entity.Developer;
+import pl.cyfrowypolsat.entity.ErrorCount;
 import pl.cyfrowypolsat.entity.LogDir;
 import pl.cyfrowypolsat.entity.LogfileExpression;
 import pl.cyfrowypolsat.job.FileDownloader;
@@ -134,12 +137,16 @@ public class JUnitTest extends Assert {
 		}
 	}
 	
-	//TODO implement it
 	public void errorCountCrud() {
-	}
-	
-	//TODO implement it
-	public void developerCrud() {
+		Application application = getTestApp();
+		ErrorCount ec = new ErrorCount();
+		ec.setApplication(application);
+		ec.setDate(new Date());
+		ec.setCount(100);
+		ec.setErrorType("NullPointerException");
+		ErrorCounterDao.save(ec);
+		
+		ApplicationDao.delete(application);
 	}
 		
 	private Application getTestApp() {

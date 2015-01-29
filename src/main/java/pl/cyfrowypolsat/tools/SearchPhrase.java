@@ -57,7 +57,7 @@ public class SearchPhrase implements Runnable {
 					getMoreStackTrace = true;
 				}
 				if (getMoreStackTrace == true && stackTraceLineNo < 6) {
-					sb.append(s + "<br>");
+					sb.append(getFormattedText(s, searchingPhrase));
 					stackTraceLineNo++;
 				}
 				if (stackTraceLineNo == 5) {
@@ -75,6 +75,12 @@ public class SearchPhrase implements Runnable {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public static String getFormattedText(String text, String searchingPhrase){
+		return text.replaceAll("\t", "&emsp;")
+				.replaceAll(searchingPhrase, "<b>"+searchingPhrase+"</b>") 
+				+ "<br>";
 	}
 
 	public File getFile() {

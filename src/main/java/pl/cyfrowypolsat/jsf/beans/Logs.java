@@ -123,7 +123,7 @@ public class Logs implements Serializable {
 	}
 	
 	private String showLines(String fileName, int startLine, int endLine)  {
-		String line = null;
+		String line = "";
 		int currentLineNo = 0;
 
 		BufferedReader in = null;
@@ -141,7 +141,7 @@ public class Logs implements Serializable {
 			
 			//read until endLine
 			while(currentLineNo<=endLine) {
-				line += in.readLine()+"<br/>";
+				line += SearchPhrase.getFormattedText(in.readLine(), searchingPhrase);
 				currentLineNo++;
 			}
 			return line;
