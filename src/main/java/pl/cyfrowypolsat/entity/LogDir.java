@@ -3,6 +3,7 @@ package pl.cyfrowypolsat.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,13 +19,14 @@ public class LogDir implements Serializable {
 	@Id @GeneratedValue
 	private long id;
 	
+	@Column(nullable=false)
 	private String path;
 	
 	@Transient
 	private boolean editable;
 	
 	@ManyToOne
-	@JoinColumn(name="application_id")
+	@JoinColumn(nullable=false)
 	private Application application;
 	
 	public String getPath() {

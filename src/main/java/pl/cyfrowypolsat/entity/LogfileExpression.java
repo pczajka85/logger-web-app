@@ -2,9 +2,11 @@ package pl.cyfrowypolsat.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -16,8 +18,10 @@ public class LogfileExpression implements Serializable{
 	private long id ;
 	
 	@ManyToOne
+	@JoinColumn(nullable=false)
 	private Application application;
 	
+	@Column(nullable=false)
 	private String fileExpression;
 
 	private boolean editable;

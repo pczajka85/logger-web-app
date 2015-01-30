@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,15 +23,20 @@ public class Application implements Serializable{
 	@Id @GeneratedValue
 	private long id;
 	
+	@Column(nullable=false, unique=true)
 	private String name;
 	
+	@Column(nullable=false)
 	private String host;
 	
+	@Column(nullable=false)
 	private String username;
 	
+	@Column(nullable=false)
 	private String password;
 	
-	private boolean started;
+	@Column(nullable=false)
+	private boolean started = false;
 
 	@OneToMany(mappedBy="application", fetch=FetchType.EAGER)
 	@Cascade(CascadeType.DELETE)
