@@ -21,7 +21,7 @@ import pl.cyfrowypolsat.entity.LogDir;
 import pl.cyfrowypolsat.entity.LogfileExpression;
 import pl.cyfrowypolsat.job.FileDownloader;
 
-public class JUnitTest extends Assert {
+public class AllTests extends Assert {
 
 	@Test
 	public void systemConfiguration(){
@@ -137,6 +137,7 @@ public class JUnitTest extends Assert {
 		}
 	}
 	
+	@Test
 	public void errorCountCrud() {
 		Application application = getTestApp();
 		ErrorCount ec = new ErrorCount();
